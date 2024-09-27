@@ -176,3 +176,8 @@ Aliases:  www.youtube.com
 
 ### 🌞 Livrez un deuxième fichier : dns.pcap
 >### Dans le dossier ```dns.pcap```
+
+### 🌞 Effectue un scan du réseau auquel tu es connecté
+```powershell
+
+```
