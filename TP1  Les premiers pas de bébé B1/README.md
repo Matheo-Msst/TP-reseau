@@ -25,7 +25,7 @@ Carte Ethernet Ethernet :
    Statut du média. . . . . . . . . . . . : Média déconnecté
    Suffixe DNS propre à la connexion. . . :
 ```
->### Je n'ai pas d'adresse IP pour l'Ethernet car je n'ai pas de câble dessus
+>#### Je n'ai pas d'adresse IP pour l'Ethernet car je n'ai pas de câble dessus
 ### 🌞 Si t'as un accès internet normal, d'autres infos sont forcément dispos...
 ## **- Adresse IP de la passerelle, DNS et DHCP du réseau local**
 ```powershell
@@ -172,12 +172,26 @@ Addresses:  2a00:1450:4007:80c::200e
 Aliases:  www.youtube.com
 ```
 ### 🌞 J'attends dans le dépôt git de rendu un fichier ping.pcap
->### Dans le dossier ```ping.pcap```
+>#### Dans le dossier ```ping.pcap```
 
 ### 🌞 Livrez un deuxième fichier : dns.pcap
->### Dans le dossier ```dns.pcap```
+>#### Dans le dossier ```dns.pcap```
 
 ### 🌞 Effectue un scan du réseau auquel tu es connecté
 ```powershell
+PS C:\Users\mathe> nmap.exe -sn -PR  10.33.64.0/20
 
+Nmap scan report for 10.33.69.208
+Host is up (0.016s latency).
+MAC Address: 30:89:4A:0D:DA:8B (Intel Corporate)
+Nmap scan report for 10.33.69.232
+Host is up (0.10s latency).
+MAC Address: 3C:06:30:3B:B5:3C (Apple)
+Nmap scan report for 10.33.70.41
+Host is up (0.43s latency).
+MAC Address: CE:71:C6:DF:63:76 (Unknown)
+Nmap scan report for 10.33.70.42
+Host is up (0.0060s latency).
+MAC Address: 9C:FC:E8:42:F1:7B (Intel Corporate)
 ```
+> #### j'en déduis que la 10.33.69.210 n'est pas prise je vais donc prendre celle la pour la suite
