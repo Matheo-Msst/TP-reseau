@@ -178,7 +178,7 @@ Aliases:  www.youtube.com
 >#### Dans le dossier ```dns.pcap```
 
 ### 🌞 Effectue un scan du réseau auquel tu es connecté
-
+>#### 10.33.64.0 est l'adresse réseau 
 ```powershell
 PS C:\Users\mathe> nmap.exe -sn -PR  10.33.64.0/20
 
