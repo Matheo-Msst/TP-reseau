@@ -199,7 +199,7 @@ MAC Address: 9C:FC:E8:42:F1:7B (Intel Corporate)
 > #### j'en déduis que la 10.33.69.210 n'est pas prise je vais donc prendre celle la pour la suite
 
 ```powershell
-PS C:\WINDOWS\system32> Get-NetAdapter
+PS C:\Users\mathe> Get-NetAdapter
 
 Name                      InterfaceDescription                    ifIndex Status       MacAddress          LinkSpeed
 ----                      --------------------                    ------- ------       ----------          ---------
@@ -207,7 +207,7 @@ Wi-Fi                     MediaTek Wi-Fi 6 MT7921 Wireless
 ```
 
 ```powershell
-PS C:\WINDOWS\system32> New-NetIPAddress -InterfaceAlias Wi-Fi -IPAddress 10.33.69.210 -PrefixLength 20 -DefaultGateway 10.33.79.254
+PS C:\Users\mathe> New-NetIPAddress -InterfaceAlias Wi-Fi -IPAddress 10.33.69.210 -PrefixLength 20 -DefaultGateway 10.33.79.254
 >>
 
 
@@ -224,32 +224,15 @@ ValidLifetime     : Infinite ([TimeSpan]::MaxValue)
 PreferredLifetime : Infinite ([TimeSpan]::MaxValue)
 SkipAsSource      : False
 PolicyStore       : ActiveStore
-
-IPAddress         : 10.33.69.210
-InterfaceIndex    : 17
-InterfaceAlias    : Wi-Fi
-AddressFamily     : IPv4
-Type              : Unicast
-PrefixLength      : 20
-PrefixOrigin      : Manual
-SuffixOrigin      : Manual
-AddressState      : Invalid
-ValidLifetime     : Infinite ([TimeSpan]::MaxValue)
-PreferredLifetime : Infinite ([TimeSpan]::MaxValue)
-SkipAsSource      : False
-PolicyStore       : PersistentStore
-
 ```
 
 ```powershell
-PS C:\WINDOWS\system32> ipconfig
+PS C:\Users\mathe> ipconfig
 
 Configuration IP de Windows
 
 Carte réseau sans fil Wi-Fi :
 
-   Suffixe DNS propre à la connexion. . . :
-   Adresse IPv6 de liaison locale. . . . .: fe80::4e85:67fa:c4c7:ec7d%17
    Adresse IPv4. . . . . . . . . . . . . .: 10.33.69.210
    Masque de sous-réseau. . . . . . . . . : 255.255.240.0
    Passerelle par défaut. . . . . . . . . : 10.33.79.254
