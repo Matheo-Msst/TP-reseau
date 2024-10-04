@@ -95,7 +95,7 @@ Statistiques Ping pour 10.33.77.179:
 Durée approximative des boucles en millisecondes :
     Minimum = 0ms, Maximum = 0ms, Moyenne = 0ms
 ```
-## **- Vers l'adresse IP ```127.0.0.1```***
+## **- Vers l'adresse IP ```127.0.0.1```**
 ```powershell
 PS C:\WINDOWS\system32> ping 127.0.0.1
 
