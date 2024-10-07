@@ -91,3 +91,67 @@ BYBEYEBYEBEYBE
 ### **1. Serveur web**
 > Dans le fichier "http.pcap"
 ### **2. Autres services**
+## - Service 1 (spotify) 
+```powershell
+netstat -a -b -n 
+
+TCP    192.168.1.144:15479    192.168.1.175:8009     ESTABLISHED
+[Spotify.exe]
+```
+|Adresse Ip :   |192.168.1.175 |
+|:-------------:|:------------:|
+|**Port** **:** |**8009**      |
+
+> Dans le fichier "service1.pcap"
+
+## - Service 2 (Valorant "jeux")
+```powershell
+netstat -a -b -n 
+
+TCP    192.168.1.144:15856    172.65.252.238:5223    ESTABLISHED
+[RiotClientServices.exe]
+```
+|Adresse Ip :   |172.65.252.238 |
+|:-------------:|:-------------:|
+|**Port** **:** |**5223**       |
+
+> Dans le fichier "service2.pcap"
+
+## - Service 3 (Opéra GX "navigateur")
+```powershell
+netstat -a -b -n 
+
+TCP    192.168.1.144:22504    192.168.1.175:8009     ESTABLISHED
+[opera.exe]
+```
+|Adresse Ip :   |192.168.1.175  |
+|:-------------:|:-------------:|
+|**Port** **:** |**8009**       |
+
+> Dans le fichier "service3.pcap"
+
+## - Service 4 (teams)
+```powershell
+netstat -a -b -n 
+
+TCP    192.168.1.144:30223    52.123.200.60:443      ESTABLISHED
+[ms-teams.exe]
+```
+|Adresse Ip :   |52.123.200.60  |
+|:-------------:|:-------------:|
+|**Port** **:** |**443**        |
+
+> Dans le fichier "service4.pcap"
+
+## - Service 5 (Phasmophobia "jeux")
+```powershell
+netstat -a -b -n 
+
+TCP    192.168.1.144:30487    34.102.143.233:443     ESTABLISHED
+[Phasmophobia.exe]
+```
+|Adresse Ip :   |34.102.143.233 |
+|:-------------:|:-------------:|
+|**Port** **:** |**443**        |
+
+> Dans le fichier "service5.pcap"
