@@ -201,3 +201,31 @@ Durée approximative des boucles en millisecondes :
 ```
 ## II. Accès internet pour tous
 ## ☀️ Prouvez que les clients ont un accès internet
+```powershell
+matheo@matheo-VirtualBox:~$ ping www.ynov.com
+PING www.ynov.com (104.26.10.233) 56(84) bytes of data.
+64 bytes from 104.26.10.233: icmp_seq=1 ttl=51 time=15.6 ms
+64 bytes from 104.26.10.233: icmp_seq=2 ttl=51 time=15.3 ms
+64 bytes from 104.26.10.233: icmp_seq=3 ttl=51 time=17.1 ms
+64 bytes from 104.26.10.233: icmp_seq=4 ttl=51 time=14.7 ms
+64 bytes from 104.26.10.233: icmp_seq=5 ttl=51 time=16.9 ms
+^C
+--- www.ynov.com ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4092ms
+rtt min/avg/max/mdev = 14.748/15.912/17.132/0.928 ms
+```
+## ☀️ Montrez-moi le contenu final du fichier de configuration de l'interface réseau
+```powershell
+matheo@matheo-VirtualBox:~$ cat /etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s8:
+      dhcp4: no
+      addresses: [10.5.1.12/24]
+      gateway4: 10.5.1.254
+      nameservers:
+        adresses: [1.1.1.1]
+```
+## III. Serveur SSH
