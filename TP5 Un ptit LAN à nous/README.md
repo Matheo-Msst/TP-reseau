@@ -59,7 +59,7 @@ Carte Ethernet Ethernet 4 :
 ```
 ### - vous avez bien configuré les hostnames demandés
 ### Pour le client1 :
-```ubuntu
+```powershell
 matheo@matheo-VirtualBox:~$ sudo hostnamectl set-hostname client1.tp5.b1
 
 matheo@matheo-VirtualBox:~$ sudo hostnamectl
@@ -79,7 +79,7 @@ Firmware Version: VirtualBox
     Firmware Age: 17y 10month 2w
 ```
 ### Pour le client2 :
-```ubuntu
+```powershell
 matheo@matheo-VirtualBox:~$ sudo hostnamectl set-hostname client2.tp5.b1
 
 matheo@matheo-VirtualBox:~$ sudo hostnamectl
@@ -99,7 +99,7 @@ Firmware Version: VirtualBox
     Firmware Age: 17y 10month 2w
 ```
 ### Pour le routeur :
-```ubuntu
+```powershell
 [root@localhost matheo]# sudo hostnamectl set-hostname routeur.tp5.b1
 [root@localhost matheo]# sudo hostnamectl
  Static hostname: routeur.tp5.b1
