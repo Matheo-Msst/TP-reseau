@@ -228,4 +228,9 @@ network:
       nameservers:
         adresses: [1.1.1.1]
 ```
+```powershell
+cat /etc/resolv.conf
+
+nameserver 1.1.1.1
+```
 ## III. Serveur SSH
