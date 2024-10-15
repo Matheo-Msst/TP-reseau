@@ -298,3 +298,59 @@ subnet 10.5.1.0 netmask 255.255.255.0 {
 
 ```
 ## B. Test avec un nouveau client
+## ☀️ Créez une nouvelle machine client client3.tp5.b1
+```powershell
+matheo@client3:~$ sudo hostnamectl
+Static hostname: client3.tp5.b1
+
+matheo@client3:~$ ip a
+2: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:f1:14:00 brd ff:ff:ff:ff:ff:ff
+    inet 10.5.1.137/24 brd 10.5.1.255 scope global dynamic noprefixroute enp0s8
+
+matheo@client3:~$ ping ynov.com
+PING ynov.com (104.26.11.233) 56(84) bytes of data.
+64 bytes from 104.26.11.233: icmp_seq=1 ttl=51 time=16.6 ms
+64 bytes from 104.26.11.233: icmp_seq=2 ttl=51 time=14.4 ms
+64 bytes from 104.26.11.233: icmp_seq=3 ttl=51 time=16.5 ms
+^C
+--- ynov.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2004ms
+rtt min/avg/max/mdev = 14.431/15.849/16.594/1.003 ms
+```
+## C. Consulter le bail DHCP
+## ☀️  Consultez le bail DHCP qui a été créé pour notre client
+```powershell
+[root@routeur dhcpd]# cat /var/lib/dhcpd/dhcpd.leases
+# The format of this file is documented in the dhcpd.leases(5) manual page.
+# This lease file was written by isc-dhcp-4.4.2b1
+
+# authoring-byte-order entry is generated, DO NOT DELETE
+authoring-byte-order little-endian;
+
+server-duid "\000\001\000\001.\241\002\361\010\000'\302`\011";
+
+lease 10.5.1.137 {
+  starts 2 2024/10/15 20:16:06;
+  ends 3 2024/10/16 08:16:06;
+  cltt 2 2024/10/15 20:16:06;
+  binding state active;
+  next binding state free;
+  rewind binding state free;
+  hardware ethernet 08:00:27:f1:14:00;
+  uid "\001\010\000'\361\024\000";
+  client-hostname "matheo-VirtualBox";
+}
+```
+## ☀️ Confirmez qu'il s'agit bien de la bonne adresse MAC
+```powershell
+[root@routeur dhcpd]# cat /var/lib/dhcpd/dhcpd.leases
+lease 10.5.1.137 {
+  hardware ethernet 08:00:27:f1:14:00;
+}
+
+matheo@client3:~$ ip a
+2: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:f1:14:00 brd ff:ff:ff:ff:ff:ff
+    inet 10.5.1.137/24 brd 10.5.1.255 scope global dynamic noprefixroute enp0s8
+```
