@@ -200,6 +200,20 @@ Durée approximative des boucles en millisecondes :
     Minimum = 0ms, Maximum = 0ms, Moyenne = 0ms
 ```
 ## II. Accès internet pour tous
+## 1. Accès internet routeur
+## ☀️ Déjà, prouvez que le routeur a un accès internet
+```powershell
+[root@routeur matheo]# ping ynov.com
+PING ynov.com (104.26.11.233) 56(84) bytes of data.
+64 bytes from 104.26.11.233 (104.26.11.233): icmp_seq=1 ttl=46 time=37.5 ms
+64 bytes from 104.26.11.233 (104.26.11.233): icmp_seq=2 ttl=46 time=36.0 ms
+64 bytes from 104.26.11.233 (104.26.11.233): icmp_seq=3 ttl=46 time=33.3 ms
+^C
+--- ynov.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2004ms
+rtt min/avg/max/mdev = 33.324/35.580/37.451/1.706 ms
+```
+## 2. Accès internet clients
 ## ☀️ Prouvez que les clients ont un accès internet
 ```powershell
 matheo@matheo-VirtualBox:~$ ping www.ynov.com
@@ -215,6 +229,7 @@ PING www.ynov.com (104.26.10.233) 56(84) bytes of data.
 rtt min/avg/max/mdev = 14.748/15.912/17.132/0.928 ms
 ```
 ## ☀️ Montrez-moi le contenu final du fichier de configuration de l'interface réseau
+#### Sur le client2 :
 ```powershell
 matheo@matheo-VirtualBox:~$ cat /etc/netplan/01-netcfg.yaml
 network:
@@ -228,9 +243,12 @@ network:
       nameservers:
         adresses: [1.1.1.1]
 ```
-```powershell
-cat /etc/resolv.conf
-
-nameserver 1.1.1.1
-```
 ## III. Serveur SSH
+## ☀️ Sur routeur.tp5.b1, déterminer sur quel port écoute le serveur SSH
+```powershell
+[root@routeur matheo]# sudo ss -lnpt| grep 22
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=707,fd=3))
+LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=707,fd=4))
+```
+## ☀️ Sur routeur.tp5.b1, vérifier que ce port est bien ouvert
+
