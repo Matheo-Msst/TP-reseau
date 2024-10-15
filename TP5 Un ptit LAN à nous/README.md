@@ -295,10 +295,20 @@ subnet 10.5.1.0 netmask 255.255.255.0 {
 [root@routeur dhcp]# systemctl enable --now dhcpd
 [root@routeur dhcp]# firewall-cmd --add-service=dhcp
 [root@routeur dhcp]# firewall-cmd --runtime-to-permanent
-
+[root@routeur dhcp]# sudo systemctl start dhcpd
 ```
 ## B. Test avec un nouveau client
 ## ☀️ Créez une nouvelle machine client client3.tp5.b1
+### Fichier ```01-netcfg.yaml```
+```powershell
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp0s8:
+      dhcp4: yes
+```
+### Nommage et comfimation des informations du client 3
 ```powershell
 matheo@client3:~$ sudo hostnamectl
 Static hostname: client3.tp5.b1
