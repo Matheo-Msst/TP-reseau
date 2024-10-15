@@ -251,4 +251,50 @@ LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=707
 LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=707,fd=4))
 ```
 ## ☀️ Sur routeur.tp5.b1, vérifier que ce port est bien ouvert
+```powershell
+[root@routeur matheo]# sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s3 enp0s8
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports: 22/tcp
+  protocols:
+  forward: yes
+  masquerade: yes
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+[root@routeur matheo]#
+```
+## IV. Serveur DHCP
+## 1. Le but
+## A. Installation et configuration du serveur DHCP
+## ☀️ Installez et configurez un serveur DHCP sur la machine routeur.tp5.b1
+```powershell
+[root@routeur matheo]# dnf -y install dhcp-server
+[root@routeur dhcp]# sudo nano dhcpd.conf
+```
+### Contenu du fichier "dhcpd.conf
+```powershell
+# specify DNS server's hostname or IP address
+option domain-name-servers  1.1.1.1;
+# specify network address and subnetmask
+subnet 10.5.1.0 netmask 255.255.255.0 {
+    # specify the range of lease IP address
+    range dynamic-bootp 10.5.1.137 10.5.1.237;
+    # specify broadcast address
+    option broadcast-address 10.5.1.255;
+    # specify gateway
+    option routers 10.5.1.254;
+}
+```
+```powershell
+[root@routeur dhcp]# systemctl enable --now dhcpd
+[root@routeur dhcp]# firewall-cmd --add-service=dhcp
+[root@routeur dhcp]# firewall-cmd --runtime-to-permanent
 
+```
+## B. Test avec un nouveau client
