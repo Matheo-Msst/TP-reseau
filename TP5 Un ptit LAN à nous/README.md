@@ -277,7 +277,7 @@ public (active)
 [root@routeur matheo]# dnf -y install dhcp-server
 [root@routeur dhcp]# sudo nano dhcpd.conf
 ```
-### Contenu du fichier "dhcpd.conf
+### Contenu du fichier ```dhcpd.conf```
 ```powershell
 # specify DNS server's hostname or IP address
 option domain-name-servers  1.1.1.1;
