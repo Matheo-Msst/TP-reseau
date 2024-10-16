@@ -1,0 +1,40 @@
+# TP6 : Des bo services dans des bo LANs
+## I. Le setup
+## 2. Marche à suivre
+## ☀️ ️ Prouvez que ...
+### - une machine du LAN1 peut joindre internet :
+```powershell
+matheo@client1:~$ ping google.com
+PING google.com (142.251.37.46) 56(84) bytes of data.
+64 bytes from mrs09s13-in-f14.1e100.net (142.251.37.46): icmp_seq=1 ttl=112 time=24.4 ms
+64 bytes from mrs09s13-in-f14.1e100.net (142.251.37.46): icmp_seq=2 ttl=112 time=23.9 ms
+64 bytes from mrs09s13-in-f14.1e100.net (142.251.37.46): icmp_seq=3 ttl=112 time=18.5 ms
+^C
+--- google.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 18.454/22.248/24.394/2.690 ms
+```
+### - une machine du LAN2 peut joindre internet :
+```powershell
+[root@web matheo]# ping ynov.com
+PING ynov.com (104.26.10.233) 56(84) bytes of data.
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=1 ttl=53 time=20.0 ms
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=2 ttl=53 time=19.4 ms
+64 bytes from 104.26.10.233 (104.26.10.233): icmp_seq=3 ttl=53 time=18.3 ms
+^C
+--- ynov.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 18.290/19.205/19.969/0.693 ms
+```
+### - une machine du LAN1 peut joindre une machine du LAN2 :
+```powershell
+[root@dhcd matheo]# ping 10.6.2.12
+PING 10.6.2.12 (10.6.2.12) 56(84) bytes of data.
+64 bytes from 10.6.2.12: icmp_seq=1 ttl=63 time=0.621 ms
+64 bytes from 10.6.2.12: icmp_seq=2 ttl=63 time=0.730 ms
+64 bytes from 10.6.2.12: icmp_seq=3 ttl=63 time=0.666 ms
+^C
+--- 10.6.2.12 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2029ms
+rtt min/avg/max/mdev = 0.621/0.672/0.730/0.044 ms
+```
