@@ -83,4 +83,18 @@ rtt min/avg/max/mdev = 17.945/19.944/22.628/1.972 ms
 ### 1. Serveur Web
 ### 2. Install this shiet
 ### 3. Analyse et test
-## 
+## ☀️ Déterminer sur quel port écoute le serveur NGINX
+```powershell 
+root@client1:/home/matheo# sudo ss -lnpt
+State              Recv-Q             Send-Q                         Local Address:Port                         Peer Address:Port            Process
+LISTEN             0                  4096                               127.0.0.1:631                               0.0.0.0:*                users:(("cupsd",pid=1246,fd=7))
+LISTEN             0                  4096                              127.0.0.54:53                                0.0.0.0:*                users:(("systemd-resolve",pid=428,fd=17))
+LISTEN             0                  511                                  0.0.0.0:80                                0.0.0.0:*                users:(("nginx",pid=15509,fd=5),("nginx",pid=15508,fd=5),("nginx",pid=15501,fd=5))
+LISTEN             0                  4096                           127.0.0.53%lo:53                                0.0.0.0:*                users:(("systemd-resolve",pid=428,fd=15))
+LISTEN             0                  4096                                   [::1]:631                                  [::]:*                users:(("cupsd",pid=1246,fd=6))
+LISTEN             0                  4096                                       *:22                                      *:*                users:(("sshd",pid=1273,fd=3),("systemd",pid=1,fd=426))
+LISTEN             0                  511                                     [::]:80                                   [::]:*                users:(("nginx",pid=15509,fd=6),("nginx",pid=15508,fd=6),("nginx",pid=15501,fd=6))
+root@client1:/home/matheo# sudo ss -lnpt | grep 80
+LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=15509,fd=5),("nginx",pid=15508,fd=5),("nginx",pid=15501,fd=5))
+LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=15509,fd=6),("nginx",pid=15508,fd=6),("nginx",pid=15501,fd=6))
+```
