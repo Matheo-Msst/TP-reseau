@@ -63,3 +63,19 @@ Link 2 (enp0s8)
 Current DNS Server: 1.1.1.1
        DNS Servers: 1.1.1.1
 ```
+```powershell
+matheo@client1:~$ ip r s
+default via 10.6.1.254 dev enp0s8 proto dhcp src 10.6.1.37 metric 100
+10.6.1.0/24 dev enp0s8 proto kernel scope link src 10.6.1.37 metric 100
+```
+```powershell
+matheo@client1:~$ ping youtube.com
+PING youtube.com (216.58.205.206) 56(84) bytes of data.
+64 bytes from mrs09s09-in-f14.1e100.net (216.58.205.206): icmp_seq=1 ttl=112 time=17.9 ms
+64 bytes from mrs09s09-in-f14.1e100.net (216.58.205.206): icmp_seq=2 ttl=112 time=22.6 ms
+64 bytes from mrs09s09-in-f14.1e100.net (216.58.205.206): icmp_seq=3 ttl=112 time=19.3 ms
+^C
+--- youtube.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 17.945/19.944/22.628/1.972 ms
+```
