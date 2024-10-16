@@ -38,3 +38,28 @@ PING 10.6.2.12 (10.6.2.12) 56(84) bytes of data.
 3 packets transmitted, 3 received, 0% packet loss, time 2029ms
 rtt min/avg/max/mdev = 0.621/0.672/0.730/0.044 ms
 ```
+## II. LAN clients
+## 1. Serveur DHCP
+## 2. Client
+## ☀️ ️ Prouvez que ...
+```powershell
+matheo@client1:~$ ip a
+2: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:1b:19:19 brd ff:ff:ff:ff:ff:ff
+    inet 10.6.1.37/24 brd 10.6.1.255 scope global dynamic noprefixroute enp0s8
+       valid_lft 40590sec preferred_lft 40590sec
+    inet6 fe80::a00:27ff:fe1b:1919/64 scope link
+       valid_lft forever preferred_lft forever
+```
+```powershell
+matheo@client1:~$ resolvectl
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: stub
+
+Link 2 (enp0s8)
+    Current Scopes: DNS
+         Protocols: +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+Current DNS Server: 1.1.1.1
+       DNS Servers: 1.1.1.1
+```
