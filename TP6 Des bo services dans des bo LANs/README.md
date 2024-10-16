@@ -1,6 +1,6 @@
 # TP6 : Des bo services dans des bo LANs
 ## I. Le setup
-## 2. Marche à suivre
+### 2. Marche à suivre
 ## ☀️ ️ Prouvez que ...
 ### - une machine du LAN1 peut joindre internet :
 ```powershell
@@ -39,8 +39,8 @@ PING 10.6.2.12 (10.6.2.12) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.621/0.672/0.730/0.044 ms
 ```
 ## II. LAN clients
-## 1. Serveur DHCP
-## 2. Client
+### 1. Serveur DHCP
+### 2. Client
 ## ☀️ ️ Prouvez que ...
 ```powershell
 matheo@client1:~$ ip a
@@ -80,7 +80,7 @@ PING youtube.com (216.58.205.206) 56(84) bytes of data.
 rtt min/avg/max/mdev = 17.945/19.944/22.628/1.972 ms
 ```
 ## III. LAN serveurzzzz
-## 1. Serveur Web
-## 2. Install this shiet
-## 3. Analyse et test
+### 1. Serveur Web
+### 2. Install this shiet
+### 3. Analyse et test
 ## 
