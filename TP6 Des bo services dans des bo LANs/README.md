@@ -79,3 +79,8 @@ PING youtube.com (216.58.205.206) 56(84) bytes of data.
 3 packets transmitted, 3 received, 0% packet loss, time 2003ms
 rtt min/avg/max/mdev = 17.945/19.944/22.628/1.972 ms
 ```
+## III. LAN serveurzzzz
+## 1. Serveur Web
+## 2. Install this shiet
+## 3. Analyse et test
+## 
