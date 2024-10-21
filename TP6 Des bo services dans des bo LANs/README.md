@@ -39,7 +39,7 @@ PING 10.6.2.12 (10.6.2.12) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.621/0.672/0.730/0.044 ms
 ```
 ## II. LAN clients
-### 1. Serveur DHCP
+### *1. Serveur DHCP*
 ### 2. Client
 ## ☀️ ️ Prouvez que ...
 ```powershell
@@ -85,7 +85,7 @@ rtt min/avg/max/mdev = 17.945/19.944/22.628/1.972 ms
 ### 3. Analyse et test
 ## ☀️ Déterminer sur quel port écoute le serveur NGINX
 ```powershell 
-[root@web matheo]# sudo ss -lnpt
+[root@web matheo]# ss -lnpt
 State                 Recv-Q                Send-Q                                 Local Address:Port                                 Peer Address:Port                Process
 LISTEN                0                     128                                          0.0.0.0:22                                        0.0.0.0:*                    users:(("sshd",pid=697,fd=3))
 LISTEN                0                     511                                          0.0.0.0:80                                        0.0.0.0:*                    users:(("nginx",pid=766,fd=6),("nginx",pid=765,fd=6))
@@ -93,7 +93,133 @@ LISTEN                0                     128                                 
 LISTEN                0                     511                                             [::]:80                                           [::]:*                    users:(("nginx",pid=766,fd=7),("nginx",pid=765,fd=7))
 ```
 ```powershell
-[root@web matheo]# sudo ss -lnpt | grep 80
+[root@web matheo]# ss -lnpt | grep 80
 LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("nginx",pid=766,fd=6),("nginx",pid=765,fd=6))
-LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=766,fd=7),("nginx",pid=765,fd=7))```
+LISTEN 0      511             [::]:80           [::]:*    users:(("nginx",pid=766,fd=7),("nginx",pid=765,fd=7))
+```
+## ☀️ Ouvrir ce port dans le firewall
+```powershell
+[root@web matheo]# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s8
+  sources:
+  services: http ssh
+  ports: 80/tcp
+```
+## ☀️ Visitez le site web !
+```powershell
+matheo@client1:~$ curl http://10.6.2.11
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>HTTP Server Test Page powered by: Rocky Linux</title>
+    <style type="text/css">
+      /*<![CDATA[*/
+```
+### *2. Serveur DNS*
+### 1. Présentation serveur DNS
+### 2. Dans notre TP
+### 3. Zé bardi
+### 4. Analyse du service
+## ☀️ Déterminer sur quel(s) port(s) écoute le service BIND9
+```powershell 
+[root@dns matheo]# sudo ss -lnpt | grep 53
+LISTEN 0      10         127.0.0.1:53        0.0.0.0:*    users:(("named",pid=1912,fd=22))
+LISTEN 0      10         10.6.2.12:53        0.0.0.0:*    users:(("named",pid=1912,fd=25))
+LISTEN 0      4096       127.0.0.1:953       0.0.0.0:*    users:(("named",pid=1912,fd=28))
+LISTEN 0      4096           [::1]:953          [::]:*    users:(("named",pid=1912,fd=29))
+LISTEN 0      10             [::1]:53           [::]:*    users:(("named",pid=1912,fd=27))
+```
+## ☀️ Ouvrir ce(s) port(s) dans le firewall
+```powershell
+[root@dns matheo]# sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s8
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports: 53/tcp 53/udp
+```
+### 5. Tests manuels
+## ☀️ Effectuez des requêtes DNS manuellement depuis le serveur DNS lui-même dans un premier temps
+```powershell
+[root@dns matheo]# dig web.tp6.b1 @10.6.2.12
+;; QUESTION SECTION:
+;web.tp6.b1.                    IN      A
+
+;; ANSWER SECTION:
+web.tp6.b1.             86400   IN      A       10.6.2.11
+```
+```powershell
+[root@dns matheo]# dig dns.tp6.b1 @10.6.2.12
+;; QUESTION SECTION:
+;dns.tp6.b1.                    IN      A
+
+;; ANSWER SECTION:
+dns.tp6.b1.             86400   IN      A       10.6.2.12
+```
+```powershell
+[root@dns matheo]# dig ynov.com @10.6.2.12
+;; QUESTION SECTION:
+;ynov.com.                      IN      A
+
+;; ANSWER SECTION:
+ynov.com.               300     IN      A       104.26.10.233
+ynov.com.               300     IN      A       172.67.74.226
+ynov.com.               300     IN      A       104.26.11.233
+```
+```powershell
+[root@dns matheo]# dig -x 10.6.2.11 @10.6.2.12
+;; QUESTION SECTION:
+;11.2.6.10.in-addr.arpa.                IN      PTR
+
+;; ANSWER SECTION:
+11.2.6.10.in-addr.arpa. 86400   IN      PTR     web.tp6.b1.
+```
+```powershell
+[root@dns matheo]# dig -x 10.6.2.12 @10.6.2.12
+;; QUESTION SECTION:
+;12.2.6.10.in-addr.arpa.                IN      PTR
+
+;; ANSWER SECTION:
+12.2.6.10.in-addr.arpa. 86400   IN      PTR     dns.tp6.b1.
+```
+## ☀️ Effectuez une requête DNS manuellement depuis client1.tp6.b1
+```powershell
+[root@dns matheo]# dig web.tp6.b1 @10.6.2.12
+;; QUESTION SECTION:
+;web.tp6.b1.                    IN      A
+
+;; ANSWER SECTION:
+web.tp6.b1.             86400   IN      A       10.6.2.11
+```
+## ☀️ Capturez une requête DNS et la réponse de votre serveur
+### 3. Serveur DHCP
+#### - récupérez une IP en DHCP sur ce nouveau client2.tp6.b1
+```powershell
+matheo@client2:~$ ip a
+2: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:93:ad:7e brd ff:ff:ff:ff:ff:ff
+    inet 10.6.1.39/24 brd 10.6.1.255 scope global dynamic noprefixroute enp0s8
+       valid_lft 42496sec preferred_lft 42496sec
+    inet6 fe80::a00:27ff:fe93:ad7e/64 scope link
+       valid_lft forever preferred_lft forever
+```
+#### - vérifiez que vous avez bien 10.6.2.12 comme serveur DNS à contacter
+```powershell
+matheo@client2:~$ resolvectl
+Global
+         Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+  resolv.conf mode: stub
+
+Link 2 (enp0s8)
+    Current Scopes: DNS
+         Protocols: +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+Current DNS Server: 10.6.2.12
+       DNS Servers: 10.6.2.12
 ```
