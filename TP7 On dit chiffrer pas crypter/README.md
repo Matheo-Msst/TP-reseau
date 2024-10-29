@@ -2,7 +2,7 @@
 ## I. Le setup
 ## II. Serveur Web
 ### 0. Setup
-### 1. HTTP
+## 1. HTTP
 ### A. Install
 ### B. Configuration
 
@@ -57,3 +57,22 @@ meow !
 ```
 ### D. Analyze
 ## 🌞 Capture tcp_http.pcap
+```powershell
+matheo@client1:~$ sudo tcpdump -w tcp_http2.pcap -i enp0s8
+```
+## 🌞 Voir la connexion établie
+```powershell
+matheo@client1:~$ sudo ss -npt
+State              Recv-Q              Send-Q                                 Local Address:Port                                 Peer Address:Port              Process
+ESTAB              0                   0                                         10.7.1.101:44990                                   10.7.1.11:80                 users:(("firefox",pid=6671,fd=64))
+ESTAB              0                   0                                         10.7.1.101:56154                               34.107.243.93:443                users:(("firefox",pid=6671,fd=138))
+ESTAB              36                  0                                [::ffff:10.7.1.101]:22                              [::ffff:10.7.1.1]:31571              users:(("sshd",pid=3915,fd=4),("sshd",pid=3770,fd=4))
+```
+## 2. On rajoute un S
+### A. Config
+## 🌞 Lister les ports en écoute sur la machine
+```powershell
+[root@web ~]# sudo ss -lnpt | grep 443
+LISTEN 0      511        10.7.1.11:443       0.0.0.0:*    users:(("nginx",pid=1340,fd=6),("nginx",pid=1339,fd=6))
+```
+## 🌞 Gérer le firewall
