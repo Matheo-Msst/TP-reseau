@@ -1,9 +1,7 @@
 # TP7 : On dit chiffrer pas crypter
 ## I. Le setup
 ## II. Serveur Web
-### 0. Setup
 ## 1. HTTP
-### A. Install
 ### B. Configuration
 
 ## 🌞 Lister les ports en écoute sur la machine
@@ -58,8 +56,9 @@ meow !
 ### D. Analyze
 ## 🌞 Capture tcp_http.pcap
 ```powershell
-matheo@client1:~$ sudo tcpdump -w tcp_http2.pcap -i enp0s8
+matheo@client1:~$ sudo tcpdump -w tcp_http.pcap -i enp0s8
 ```
+>fichier : ```tcp_http.pcap```
 ## 🌞 Voir la connexion établie
 ```powershell
 matheo@client1:~$ sudo ss -npt
@@ -76,3 +75,29 @@ ESTAB              36                  0                                [::ffff:
 LISTEN 0      511        10.7.1.11:443       0.0.0.0:*    users:(("nginx",pid=1340,fd=6),("nginx",pid=1339,fd=6))
 ```
 ## 🌞 Gérer le firewall
+```powershell
+[root@web ~]# sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s8
+  sources:
+  services: ssh
+  ports: 443/tcp
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+```
+### B. Test test test analyyyze
+## 🌞 Capture tcp_https.pcap
+```powershell
+matheo@client1:~$ sudo tcpdump -w tcp_https.pcap -i enp0s8
+```
+>fichier : ```tcp_https.pcap```
+
+## III. Serveur VPN
+## 1. Install et conf Wireguard
