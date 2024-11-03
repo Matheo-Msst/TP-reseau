@@ -101,3 +101,80 @@ matheo@client1:~$ sudo tcpdump -w tcp_https.pcap -i enp0s8
 
 ## III. Serveur VPN
 ## 1. Install et conf Wireguard
+## 🌞 Prouvez que vous avez bien une nouvelle carte réseau wg0
+```powershell 
+[root@vpn matheo]# ip a
+4: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/none
+    inet 10.7.200.1/24 scope global wg0
+       valid_lft forever preferred_lft forever
+```
+## 🌞 Déterminer sur quel port écoute Wireguard
+```powershell
+[root@vpn matheo]# ss -lnpu | grep 51820
+UNCONN 0      0            0.0.0.0:51820      0.0.0.0:*
+UNCONN 0      0               [::]:51820         [::]:*
+```
+## 🌞 Ouvrez ce port dans le firewall
+```powershell 
+[root@vpn matheo]# sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp0s8 enp0s9
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports: 51820/udp
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+```
+## 2. Ajout d'un client VPN
+## 3. Proofs
+## 🌞 Ping ping ping !
+```powershell
+root@client1:/home/matheo# ping 10.7.200.1
+PING 10.7.200.1 (10.7.200.1) 56(84) bytes of data.
+64 bytes from 10.7.200.1: icmp_seq=1 ttl=64 time=0.601 ms
+64 bytes from 10.7.200.1: icmp_seq=2 ttl=64 time=0.618 ms
+64 bytes from 10.7.200.1: icmp_seq=3 ttl=64 time=1.61 ms
+^C
+--- 10.7.200.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2050ms
+rtt min/avg/max/mdev = 0.601/0.941/1.606/0.469 ms
+```
+## 🌞 Capture ping1_vpn.pcap
+```powershell
+matheo@client1:~$ sudo tcpdump -w ping1_vpn.pcap -i enp0s8
+```
+>fichier : ```ping1_vpn.pcap```
+## 🌞 Capture ping2_vpn.pcap
+```powershell
+matheo@client1:~$ sudo tcpdump -w ping2_vpn.pcap -i enp0s8
+```
+>fichier : ```ping2_vpn.pcap```
+## 🌞 Prouvez que vous avez toujours un accès internet
+```powershell
+root@client1:/home/matheo# ip route
+default via 10.7.200.1 dev wg0
+10.7.1.0/24 dev enp0s8 proto kernel scope link src 10.7.1.101 metric 100
+10.7.200.0/24 dev wg0 proto kernel scope link src 10.7.200.11
+
+```
+```powershell
+root@client1:/home/matheo# ping ynov.com
+PING ynov.com (104.26.11.233) 56(84) bytes of data.
+64 bytes from 104.26.11.233: icmp_seq=1 ttl=52 time=17.5 ms
+64 bytes from 104.26.11.233: icmp_seq=2 ttl=52 time=17.6 ms
+64 bytes from 104.26.11.233: icmp_seq=3 ttl=52 time=95.6 ms
+^C
+--- ynov.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 17.501/43.569/95.646/36.823 ms
+```
+## 4. Private service
+## 🌞 Visitez le service Web à travers le VPN
