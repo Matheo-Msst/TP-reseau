@@ -5,7 +5,7 @@
 ### B. Configuration
 
 ## 🌞 Lister les ports en écoute sur la machine
-```powershell 
+```powershell
 [root@web matheo]# ss -lnpt
 State  Recv-Q Send-Q Local Address:Port   Peer Address:Port Process
 LISTEN 0      128          0.0.0.0:22          0.0.0.0:*     users:(("sshd",pid=693,fd=3))
@@ -178,3 +178,7 @@ rtt min/avg/max/mdev = 17.501/43.569/95.646/36.823 ms
 ```
 ## 4. Private service
 ## 🌞 Visitez le service Web à travers le VPN
+```powershell
+matheo@client1:~$ curl https://sitedefou.tp7.b1 -k
+meow !
+```
